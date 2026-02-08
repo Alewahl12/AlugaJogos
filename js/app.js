@@ -7,23 +7,32 @@ function alterarStatus(numeroId){
 
 
     if (botao.textContent === 'Alugar'){
-        let confirmarAcao = confirm('Voce deseja realmente alugar o jogo?')
-        if (confirmarAcao == true){
+        if (confirm('Voce realmente deseja alugar o jogo?')){
             botao.textContent = 'Devolver';
             botao.classList.add('dashboard__item__button--return');
             imagem.classList.add('dashboard__item__img--rented');
+            quantidadeJogosAlugados ++;
+            imprimirQuantidadeJogosAlugados();
+            
         }else{
             return;
         }
         
     } else {
-        let confirmarAcao = confirm('Voce deseja realmente devolver o jogo?');
-        if (confirmarAcao == true){
+        if (confirm('Voce realmente deseja devolver o jogo?')){
             botao.textContent = 'Alugar';
             botao.classList.remove('dashboard__item__button--return');
             imagem.classList.remove('dashboard__item__img--rented');
+            quantidadeJogosAlugados --;
+            imprimirQuantidadeJogosAlugados();
         }else{
             return;
         }
     }
 }
+
+function imprimirQuantidadeJogosAlugados(){
+    console.log(`Quantidade de jogos alugados: ${quantidadeJogosAlugados}`);
+}
+
+let quantidadeJogosAlugados = document.querySelectorAll('.dashboard__item__img--rented').length;
